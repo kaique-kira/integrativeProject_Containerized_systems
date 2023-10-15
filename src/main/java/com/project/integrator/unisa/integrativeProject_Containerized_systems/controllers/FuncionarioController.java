@@ -31,8 +31,8 @@ public class FuncionarioController {
 
     @GetMapping("{id}")
     public ModelAndView detalhes(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("funcionario/detalhes");
-        modelAndView.addObject("funcionario", funcionarioRepository.getById(id)); //pesquisar alternativas para o getOne
+        ModelAndView modelAndView = new ModelAndView("funcionarios/detalhes");
+        modelAndView.addObject("funcionario", funcionarioRepository.getById(id));
         return modelAndView;
     }
 
@@ -47,17 +47,28 @@ public class FuncionarioController {
         return modelAndView;
     }
 
+    @GetMapping("/{id}/editar")
+    public ModelAndView editar(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("funcionario/formulario");
+
+        modelAndView.addObject("funcionario", funcionarioRepository.getOne(id));
+        modelAndView.addObject("cargos", cargoRepository.findAll());
+        modelAndView.addObject("ufs", UF.values());
+
+        return modelAndView;
+    }
+
     @PostMapping({"/cadastrar", "{id}/editar"})
     public String salvar(Funcionario funcionario){
         funcionarioRepository.save(funcionario);
 
-        return "redirect:/funcionario";
+        return "redirect:/funcionarios";
     }
 
     @GetMapping("{id}/excluir")
     public String excluir(@PathVariable Long id) {
         funcionarioRepository.deleteById(id);
 
-        return "redirect:/funcionario";
+        return "redirect:/funcionarios";
     }
 }

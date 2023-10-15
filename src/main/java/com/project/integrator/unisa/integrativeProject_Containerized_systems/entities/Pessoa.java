@@ -20,7 +20,7 @@ public abstract class Pessoa extends Entidade{
     @Column(nullable = false, length = 14, unique = true)
     private String cpf;
 
-    @Column(nullable = false, length = 15)
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false, length = 15)
