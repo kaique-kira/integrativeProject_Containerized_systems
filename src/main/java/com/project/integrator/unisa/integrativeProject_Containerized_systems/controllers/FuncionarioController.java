@@ -25,13 +25,13 @@ public class FuncionarioController {
     @GetMapping
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("funcionario/home");
-        modelAndView.addObject("funcionario", funcionarioRepository.findAll());
+        modelAndView.addObject("funcionarios", funcionarioRepository.findAll());
         return modelAndView;
     }
 
     @GetMapping("{id}")
     public ModelAndView detalhes(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("funcionarios/detalhes");
+        ModelAndView modelAndView = new ModelAndView("funcionario/detalhes");
         modelAndView.addObject("funcionario", funcionarioRepository.getById(id));
         return modelAndView;
     }
